@@ -1,0 +1,29 @@
+{
+  "name": "sample-bot",
+  "version": "1.0.0",
+  "description": "Basic discord bot using discord.js with typescript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:prod": "node dist/index.js",
+    "clean": "rimraf -r dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "start": "npm run build && npm run start:prod",
+    "deploy": "npm run build && node dist/deploy-commands.js"
+  },
+  "directories": {
+    "lib": "src"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
+  }
+}
