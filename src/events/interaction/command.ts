@@ -11,12 +11,17 @@ export default new Event({
         if (!interaction.inCachedGuild()) return;
 
         const command = client.commands.get(interaction.commandName);
-        const e = (await interaction.guild.commands.fetch()).find(c => c.name === command.data.name);
 
-        if (!command) {
+        if (!command?.data) {
+            interaction.reply({
+                content: `Command ${inlineCode(interaction.commandName)} not found.`,
+                ephemeral: true,
+            });
             console.error(`No command matching ${interaction.commandName} was found.`);
             return;
         };
+
+        const e = (await interaction.guild.commands.fetch()).find(c => c.name === command.data.name);
 
         if (command.opt?.guildOnly && !interaction.guild) {
             interaction.reply({
@@ -70,7 +75,7 @@ export default new Event({
                     const timeLeft = (expirationTime - now) / 1000;
 
                     interaction.reply({
-                        content: `Please wait ${bold(`${timeLeft.toFixed()} ${timeLeft < 2 ? 'second' : 'seconds'}`)} before reusing ${command.opt?.category.includes('Context') ? inlineCode(command.data.name) : chatInputApplicationCommandMention(e.name, e.id)}!`,
+                        content: `Please wait ${bold(`${timeLeft.toFixed()} ${timeLeft === 1 ? 'second' : 'seconds'}`)} before reusing ${command.opt?.category.includes('Context') ? inlineCode(command.data.name) : chatInputApplicationCommandMention(e.name, e.id)}!`,
                         ephemeral: true
                     });
                     return;
@@ -83,14 +88,22 @@ export default new Event({
             try {
                 command.execute(interaction);
             } catch (error) {
-                console.error(`Error executing ${interaction.commandName}`);
+                await interaction.reply({
+                    content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`,
+                    ephemeral: true
+                });
+                //console.error(`Error executing ${interaction.commandName}`);
                 console.error(error?.stack);
             }
         } else {
             try {
                 command.execute(interaction);
             } catch (error) {
-                console.error(`Error executing ${interaction.commandName}`);
+                await interaction.reply({
+                    content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`,
+                    ephemeral: true
+                });
+                //console.error(`Error executing ${interaction.commandName}`);
                 console.error(error?.stack);
             }
         };
