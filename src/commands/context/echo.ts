@@ -4,7 +4,7 @@ import { Command } from '../../structures/command.js';
 export default new Command({
     data: new ContextMenuCommandBuilder()
         .setName('Echo')
-        .setType(ApplicationCommandType.Message),
+        .setType(ApplicationCommandType.Message) as ContextMenuCommandBuilder,
     opt: {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
