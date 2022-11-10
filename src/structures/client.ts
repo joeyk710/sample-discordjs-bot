@@ -5,9 +5,11 @@ import { Command } from '../structures/command.js';
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
 export class ExtendedClient extends Client {
     public commands = new Collection<string, Command>();
@@ -35,7 +37,6 @@ export class ExtendedClient extends Client {
     private async loadCommands() {
         const commandsPath = path.join(__dirname, '../commands');
         const commandFolders = fs.readdirSync(commandsPath);
-        const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
         for (const category of commandFolders) {
             const commandFiles = fs.readdirSync(`${commandsPath}/${category}`).filter(file => file.endsWith('.js'));
@@ -60,7 +61,6 @@ export class ExtendedClient extends Client {
     private async loadEvents() {
         const eventsPath = path.join(__dirname, '../events');
         const eventFiles = fs.readdirSync(eventsPath);
-        const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
         for (const category of eventFiles) {
             const eventFiles = fs.readdirSync(`${eventsPath}/${category}`).filter(file => file.endsWith('.js'));

@@ -4,7 +4,7 @@ import 'dotenv/config';
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,7 +12,6 @@ const commands = [];
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(commandsPath);
-
 
 const token = process.env.TOKEN;
 const clientId = process.env.CLIENT_ID;
