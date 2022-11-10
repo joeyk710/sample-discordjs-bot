@@ -12,6 +12,10 @@
     "start": "npm run build && npm run start:prod",
     "deploy": "npm run build && node dist/deploy-commands.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joeyk710/sample-discordjs-bot.git"
+  },
   "directories": {
     "lib": "src"
   },
@@ -25,5 +29,8 @@
   "devDependencies": {
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=16.9.0"
   }
 }
