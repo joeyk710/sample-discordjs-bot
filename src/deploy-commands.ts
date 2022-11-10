@@ -18,13 +18,15 @@ const token = process.env.TOKEN;
 const clientId = process.env.CLIENT_ID;
 const guildId = process.env.GUILD_ID;
 
+const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
+
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const category of commandFolders) {
 	const commandFiles = fs.readdirSync(`${commandsPath}/${category}`).filter(file => file.endsWith('.js'));
 	for (const fileName of commandFiles) {
 		const filePath = `${commandsPath}/${category}/${fileName}`;
-
-		const command = (await import(filePath))?.default as Command;
+		const command = await dynamicImport(filePath) as Command;
+		
 		commands.push(command.data.toJSON());
 	};
 };
