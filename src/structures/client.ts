@@ -35,13 +35,14 @@ export class ExtendedClient extends Client {
     private async loadCommands() {
         const commandsPath = path.join(__dirname, '../commands');
         const commandFolders = fs.readdirSync(commandsPath);
+        const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
         for (const category of commandFolders) {
             const commandFiles = fs.readdirSync(`${commandsPath}/${category}`).filter(file => file.endsWith('.js'));
             for (const fileName of commandFiles) {
                 const filePath = `${commandsPath}/${category}/${fileName}`;
 
-                const command = (await import(filePath))?.default as Command;
+                const command = await dynamicImport(filePath) as Command;
                 // Set a new item in the Collection with the key as the command name and the value as the exported module
                 if ('data' in command && 'execute' in command) {
                     this.commands.set(command.data.name, command);
@@ -59,13 +60,14 @@ export class ExtendedClient extends Client {
     private async loadEvents() {
         const eventsPath = path.join(__dirname, '../events');
         const eventFiles = fs.readdirSync(eventsPath);
+        const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
         for (const category of eventFiles) {
             const eventFiles = fs.readdirSync(`${eventsPath}/${category}`).filter(file => file.endsWith('.js'));
             for (const fileName of eventFiles) {
                 const filePath = `${eventsPath}/${category}/${fileName}`;
 
-                const event = (await import(filePath))?.default as Event<keyof ClientEvents>;
+                const event = await dynamicImport(filePath) as Event<keyof ClientEvents>;
                 if ('name' in event && 'execute' in event) {
                     if (event.once) {
                         this.once(event.name, (...args) => event.execute(...args));
