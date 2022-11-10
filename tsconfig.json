@@ -10,12 +10,11 @@
 		"noUnusedParameters": true,
 
 		// Modules
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
+		"target": "ESNext",
 		"module": "Node16",
 		"moduleResolution": "Node16",
-		"target": "ESNext",
+		"resolveJsonModule": true,
 		
 		// Emit
 		"outDir": "dist",
@@ -29,14 +28,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"resolveJsonModule": true,
 		"importHelpers": true
 	},
-	"include": [
-		"src",
-		"environment.d.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+	"include": ["src", "environment.d.ts"],
+	"exclude": ["node_modules"]
 }
