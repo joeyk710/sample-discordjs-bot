@@ -16,6 +16,16 @@
     "type": "git",
     "url": "https://github.com/joeyk710/sample-discordjs-bot.git"
   },
+  "bugs": {
+    "url": "https://github.com/joeyk710/sample-discordjs-bot/issues"
+  },
+  "homepage": "https://github.com/joeyk710/sample-discordjs-bot#readme",
+  "keywords": [
+    "discordjs",
+    "discord-bot",
+    "discord-api",
+    "typescript-discord-bot"
+  ],
   "directories": {
     "lib": "src"
   },
