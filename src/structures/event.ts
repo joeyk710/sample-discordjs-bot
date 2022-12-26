@@ -6,7 +6,7 @@ interface EventOptions<Key extends keyof ClientEvents> {
     execute: (...args: ClientEvents[Key]) => any;
 };
 
-export class Event<Key extends keyof ClientEvents> implements EventOptions<Key> {
+export class EventClass<Key extends keyof ClientEvents> implements EventOptions<Key> {
     name: EventOptions<Key>['name'];
     once?: EventOptions<Key>['once'];
     execute: EventOptions<Key>['execute'];

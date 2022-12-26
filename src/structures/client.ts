@@ -1,7 +1,7 @@
-import { Client, ClientEvents, Collection, GatewayIntentBits } from 'discord.js';
+import { Client, ClientEvents, GatewayIntentBits } from 'discord.js';
 
-import { Event } from '../structures/event.js';
-import { Command } from '../structures/command.js';
+import { EventClass } from '../structures/event.js';
+import { CommandClass } from '../structures/command.js';
 
 import fs from 'fs';
 import path from 'path';
@@ -12,8 +12,6 @@ const __dirname = path.dirname(__filename);
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
 export class ExtendedClient extends Client {
-    public commands = new Collection<string, Command>();
-    public cooldown = new Collection<string, Collection<string, number>>();
 
     constructor() {
         super({
@@ -43,7 +41,7 @@ export class ExtendedClient extends Client {
             for (const fileName of commandFiles) {
                 const filePath = `${commandsPath}/${category}/${fileName}`;
 
-                const command = await dynamicImport(filePath) as Command;
+                const command = await dynamicImport(filePath) as CommandClass;
                 // Set a new item in the Collection with the key as the command name and the value as the exported module
                 if ('data' in command && 'execute' in command) {
                     this.commands.set(command.data.name, command);
@@ -67,7 +65,7 @@ export class ExtendedClient extends Client {
             for (const fileName of eventFiles) {
                 const filePath = `${eventsPath}/${category}/${fileName}`;
 
-                const event = await dynamicImport(filePath) as Event<keyof ClientEvents>;
+                const event = await dynamicImport(filePath) as EventClass<keyof ClientEvents>;
                 if ('name' in event && 'execute' in event) {
                     if (event.once) {
                         this.once(event.name, (...args) => event.execute(...args));

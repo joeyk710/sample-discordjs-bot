@@ -15,7 +15,7 @@ interface CommandOptions {
     execute: (...args: any) => any;
 };
 
-export class Command {
+export class CommandClass {
     data: CommandOptions['data'];
     opt?: CommandOptions['opt'];
     execute: CommandOptions['execute'];

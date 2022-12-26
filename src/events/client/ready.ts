@@ -1,7 +1,7 @@
 import { Events } from 'discord.js';
-import { Event } from '../../structures/event.js';
+import { EventClass } from '../../structures/event.js';
 
-export default new Event({
+export default new EventClass({
     name: Events.ClientReady,
     once: true,
     execute(client) {

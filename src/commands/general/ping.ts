@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from 'discord.js';
-import { Command } from '../../structures/command.js';
+import { CommandClass } from '../../structures/command.js';
 
-export default new Command({
+export default new CommandClass({
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Replies with Pong!') as SlashCommandBuilder,
