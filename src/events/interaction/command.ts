@@ -1,4 +1,4 @@
-import { Collection, Events, bold, chatInputApplicationCommandMention, inlineCode } from 'discord.js';
+import { Collection, Events, bold, inlineCode } from 'discord.js';
 
 import { EventClass } from '../../structures/event.js';
 import { missingPerms } from '../../misc/util.js';
@@ -20,11 +20,9 @@ export default new EventClass({
             return;
         };
 
-        const e = (await interaction.guild.commands.fetch()).find(c => c.name === command.data.name);
-
         if (command.opt?.guildOnly && !interaction.guild) {
             interaction.reply({
-                content: `This command can only be used in a guild.`,
+                content: 'This command can only be used in a guild.',
                 ephemeral: true
             });
             return;
@@ -74,7 +72,7 @@ export default new EventClass({
                     const timeLeft = (expirationTime - now) / 1000;
 
                     interaction.reply({
-                        content: `Please wait ${bold(`${timeLeft.toFixed()} ${timeLeft === 1 ? 'second' : 'seconds'}`)} before reusing ${command.opt?.category.includes('Context') ? inlineCode(command.data.name) : chatInputApplicationCommandMention(e.name, e.id)}!`,
+                        content: `Please wait ${bold(`${timeLeft.toFixed()} second(s)`)} before reusing this command!`,
                         ephemeral: true
                     });
                     return;
