@@ -20,7 +20,7 @@ export default new CommandClass({
             ephemeral: true
         })
         else return interaction.reply({
-            content: hyperlink(message.content, message.url),
+            content: hyperlink(message.content, message.url)
         });
     }
 });
