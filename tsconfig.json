@@ -14,6 +14,7 @@
 		"target": "ESNext",
 		"module": "Node16",
 		"moduleResolution": "Node16",
+		"moduleDetection": "force",
 		"resolveJsonModule": true,
 		
 		// Emit
