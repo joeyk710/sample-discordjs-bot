@@ -15,9 +15,6 @@ export class ExtendedClient extends Client {
             intents: [
                 GatewayIntentBits.Guilds,
             ],
-            allowedMentions: {
-                repliedUser: false,
-            },
             failIfNotExists: false,
             rest: {
                 retries: 3,
@@ -26,10 +23,9 @@ export class ExtendedClient extends Client {
         });
     };
 
-    /**
-     * This is used to load all commands in the commands folder.
-     */
-    private async loadCommands() {
+    private async loadModules() {
+
+        //Commands
         const commandsPath = fileURLToPath(new URL('../commands', import.meta.url));
         const commandFolders = fs.readdirSync(commandsPath);
 
@@ -47,13 +43,8 @@ export class ExtendedClient extends Client {
                 };
             };
         };
-        //console.log(this.commands)
-    };
 
-    /**
-     * This is used to load all events in the events folder.
-     */
-    private async loadEvents() {
+        //Events
         const eventsPath = fileURLToPath(new URL('../events', import.meta.url));
         const eventFiles = fs.readdirSync(eventsPath);
 
@@ -70,10 +61,8 @@ export class ExtendedClient extends Client {
                         this.on(event.name, (...args) => event.execute(...args));
                     }
                 } else {
-                    console.log(`[WARNING] The command at ${filePath} is missing a required "name" or "execute" property.`);
+                    console.log(`[WARNING] The event at ${filePath} is missing a required "name" or "execute" property.`);
                 };
-
-                //console.log(event)
             }
         }
     };
@@ -83,7 +72,6 @@ export class ExtendedClient extends Client {
      */
     async start() {
         this.login(process.env.TOKEN);
-        this.loadCommands();
-        this.loadEvents();
+        this.loadModules();
     };
 };
