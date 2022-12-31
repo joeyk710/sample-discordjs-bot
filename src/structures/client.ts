@@ -1,13 +1,10 @@
 import { Client, ClientEvents, GatewayIntentBits } from 'discord.js';
 
-import { EventClass } from '../structures/event.js';
-import { CommandClass } from '../structures/command.js';
+import { EventClass } from './event.js';
+import { CommandClass } from './command.js';
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import fs from 'node:fs';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
@@ -33,7 +30,7 @@ export class ExtendedClient extends Client {
      * This is used to load all commands in the commands folder.
      */
     private async loadCommands() {
-        const commandsPath = path.join(__dirname, '../commands');
+        const commandsPath = fileURLToPath(new URL('../commands', import.meta.url));
         const commandFolders = fs.readdirSync(commandsPath);
 
         for (const category of commandFolders) {
@@ -57,7 +54,7 @@ export class ExtendedClient extends Client {
      * This is used to load all events in the events folder.
      */
     private async loadEvents() {
-        const eventsPath = path.join(__dirname, '../events');
+        const eventsPath = fileURLToPath(new URL('../events', import.meta.url));
         const eventFiles = fs.readdirSync(eventsPath);
 
         for (const category of eventFiles) {

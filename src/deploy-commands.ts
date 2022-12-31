@@ -2,20 +2,13 @@ import { REST, Routes } from 'discord.js';
 import { CommandClass } from './structures/command.js';
 import 'dotenv/config';
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import fs from 'node:fs';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const commands = [];
 
-const commandsPath = path.join(__dirname, 'commands');
+const commandsPath = fileURLToPath(new URL('commands', import.meta.url));
 const commandFolders = fs.readdirSync(commandsPath);
-
-const token = process.env.TOKEN;
-const clientId = process.env.CLIENT_ID;
-const guildId = process.env.GUILD_ID;
 
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
@@ -31,7 +24,7 @@ for (const category of commandFolders) {
 };
 
 // Construct and prepare an instance of the REST module
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 // and deploy your commands!
 (async () => {
@@ -41,15 +34,15 @@ const rest = new REST({ version: '10' }).setToken(token);
 		let data: string | any[];
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		if (guildId) {
+		if (process.env.GUILD_ID) {
 			data = await rest.put(
-				Routes.applicationGuildCommands(clientId, guildId),
+				Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
 				{ body: commands },
 			) as CommandClass['data'][];
 		} else {
 			// The put method is used to fully refresh all commands in all guilds with the current set
 			data = await rest.put(
-				Routes.applicationCommands(clientId),
+				Routes.applicationCommands(process.env.CLIENT_ID),
 				{ body: commands },
 			) as CommandClass['data'][];
 		};
