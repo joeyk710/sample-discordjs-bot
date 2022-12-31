@@ -1,4 +1,4 @@
-import { Client, ClientEvents, GatewayIntentBits } from 'discord.js';
+import { Client, ClientEvents, Collection, GatewayIntentBits } from 'discord.js';
 
 import { EventClass } from './event.js';
 import { CommandClass } from './command.js';
@@ -21,8 +21,10 @@ export class ExtendedClient extends Client {
                 timeout: 15_000
             }
         });
+        this.commands = new Collection<string, CommandClass>();
+        this.cooldown = new Collection<string, Collection<string, number>>();
     };
-
+    
     private async loadModules() {
 
         //Commands
