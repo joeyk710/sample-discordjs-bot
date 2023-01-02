@@ -13,17 +13,16 @@ export default new CommandClass({
         visible: true,
         guildOnly: false,
     },
-    async execute(interaction: ChatInputCommandInteraction) {
-        interaction.reply({
+    async execute(interaction: ChatInputCommandInteraction<'cached'>) {
+        const msg = await interaction.reply({
             content: 'Pinging...',
             fetchReply: true
-        }).then((msg) => {
-            setTimeout(() => {
-                const ping = msg.createdTimestamp - interaction.createdTimestamp;
-                interaction.editReply({
-                    content: `Pong! Latency is ${inlineCode(`${ping}ms`)}. \nAPI Latency is ${inlineCode(`${interaction.client.ws.ping}ms`)}`
-                });
-            }, 3000);
         });
+        setTimeout(() => {
+            const ping = msg.createdTimestamp - interaction.createdTimestamp;
+            interaction.editReply({
+                content: `Pong! Latency is ${inlineCode(`${ping}ms`)}. \nAPI Latency is ${inlineCode(`${interaction.client.ws.ping}ms`)}`
+            });
+        }, 3000);
     },
 })
