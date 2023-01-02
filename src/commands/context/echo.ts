@@ -13,7 +13,7 @@ export default new CommandClass({
         visible: true,
         guildOnly: false,
     },
-    async execute(interaction: MessageContextMenuCommandInteraction) {
+    async execute(interaction: MessageContextMenuCommandInteraction<'cached'>) {
         const message = await interaction.options.getMessage('message').fetch();
         if (!message?.content) return interaction.reply({
             content: `${hyperlink('No content was found in this message!', message.url)}`,
