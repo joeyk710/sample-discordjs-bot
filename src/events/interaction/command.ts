@@ -20,7 +20,7 @@ export default new EventClass({
             return;
         };
 
-        if (command.opt?.guildOnly && !interaction.guild) {
+        if (command.opt?.guildOnly && interaction.channel.isDMBased()) {
             interaction.reply({
                 content: 'This command can only be used in a guild.',
                 ephemeral: true
