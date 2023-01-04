@@ -4,6 +4,7 @@ import { EventClass } from './event.js';
 import { CommandClass } from './command.js';
 
 import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
@@ -31,10 +32,10 @@ export class ExtendedClient extends Client {
         const commandsPath = fileURLToPath(new URL('../commands', import.meta.url));
         const commandFolders = fs.readdirSync(commandsPath);
 
-        for (const category of commandFolders) {
-            const commandFiles = fs.readdirSync(`${commandsPath}/${category}`).filter(file => file.endsWith('.js'));
-            for (const fileName of commandFiles) {
-                const filePath = `${commandsPath}/${category}/${fileName}`;
+        for (const folder of commandFolders) {
+            const commandFiles = fs.readdirSync(`${commandsPath}/${folder}`).filter(file => file.endsWith('.js'));
+            for (const file of commandFiles) {
+                const filePath = path.join(commandsPath, folder, file)
 
                 const command = await dynamicImport(filePath) as CommandClass;
                 // Set a new item in the Collection with the key as the command name and the value as the exported module
@@ -50,10 +51,10 @@ export class ExtendedClient extends Client {
         const eventsPath = fileURLToPath(new URL('../events', import.meta.url));
         const eventFiles = fs.readdirSync(eventsPath);
 
-        for (const category of eventFiles) {
-            const eventFiles = fs.readdirSync(`${eventsPath}/${category}`).filter(file => file.endsWith('.js'));
-            for (const fileName of eventFiles) {
-                const filePath = `${eventsPath}/${category}/${fileName}`;
+        for (const folder of eventFiles) {
+            const eventFiles = fs.readdirSync(`${eventsPath}/${folder}`).filter(file => file.endsWith('.js'));
+            for (const file of eventFiles) {
+                const filePath = path.join(eventsPath, folder, file)
 
                 const event = await dynamicImport(filePath) as EventClass<keyof ClientEvents>;
                 if ('name' in event && 'execute' in event) {
@@ -73,7 +74,7 @@ export class ExtendedClient extends Client {
      * This is used to log into the Discord API with loading all commands and events.
      */
     async start() {
-        this.login(process.env.TOKEN);
+        //this.login(process.env.TOKEN);
         this.loadModules();
     };
 };
