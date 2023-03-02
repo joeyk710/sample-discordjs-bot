@@ -16,7 +16,7 @@ export default new CommandClass({
     async execute(interaction: MessageContextMenuCommandInteraction<'cached'>) {
         const message = await interaction.options.getMessage('message').fetch();
         if (!message?.content) return interaction.reply({
-            content: `${hyperlink('No content was found in this message!', message.url)}`,
+            content: hyperlink('No content was found in this message!', message.url),
             ephemeral: true
         })
         else return interaction.reply({
