@@ -35,15 +35,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.7.1",
+    "discord.js": "^14.8.0",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "rimraf": "^4.1.2",
     "typescript": "^4.9.5"
-  },
-  "overrides": {
-    "discord-api-types": "0.37.20"
   },
   "engines": {
     "node": ">=16.9.0"
