@@ -1,10 +1,10 @@
-import { MessageContextMenuCommandInteraction, ContextMenuCommandBuilder, ApplicationCommandType, hyperlink } from 'discord.js';
+import { ContextMenuCommandBuilder, ApplicationCommandType, MessageContextMenuCommandInteraction, hyperlink } from 'discord.js';
 import { CommandClass } from '../../structures/command.js';
 
 export default new CommandClass({
     data: new ContextMenuCommandBuilder()
         .setName('Echo')
-        .setType(ApplicationCommandType.Message) as ContextMenuCommandBuilder,
+        .setType(ApplicationCommandType.Message),
     opt: {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
