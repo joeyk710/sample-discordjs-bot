@@ -3,20 +3,22 @@ import { CommandClass } from './structures/command.js';
 import 'dotenv/config';
 
 import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const commands = [];
 
-const commandsPath = fileURLToPath(new URL('commands', import.meta.url));
-const commandFolders = fs.readdirSync(commandsPath);
+const commandFolderPath = fileURLToPath(new URL('commands', import.meta.url));
+const commandFolders = fs.readdirSync(commandFolderPath);
 
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const category of commandFolders) {
-	const commandFiles = fs.readdirSync(`${commandsPath}/${category}`).filter(file => file.endsWith('.js'));
+	const commandPath = path.join(commandFolderPath, category)
+	const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
 	for (const fileName of commandFiles) {
-		const filePath = `${commandsPath}/${category}/${fileName}`;
+		const filePath = path.join(commandPath, fileName);
 		const command = await dynamicImport(filePath) as CommandClass;
 		
 		commands.push(command.data.toJSON());
