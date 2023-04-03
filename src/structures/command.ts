@@ -12,7 +12,7 @@ interface CustomOptions {
 interface CommandOptions {
     data: SlashCommandBuilder | ContextMenuCommandBuilder;
     opt?: CustomOptions;
-    execute: (...args: any) => any;
+    execute: (...args: any) => Promise<any>;
 };
 
 export class CommandClass {
