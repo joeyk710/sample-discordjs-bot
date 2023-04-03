@@ -29,13 +29,14 @@ export class ExtendedClient extends Client {
     private async loadModules() {
 
         //Commands
-        const commandsPath = fileURLToPath(new URL('../commands', import.meta.url));
-        const commandFolders = fs.readdirSync(commandsPath);
+        const commandFolderPath = fileURLToPath(new URL('../commands', import.meta.url));
+        const commandFolders = fs.readdirSync(commandFolderPath);
 
         for (const folder of commandFolders) {
-            const commandFiles = fs.readdirSync(`${commandsPath}/${folder}`).filter(file => file.endsWith('.js'));
+            const commandPath = path.join(commandFolderPath, folder);
+            const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
             for (const file of commandFiles) {
-                const filePath = path.join(commandsPath, folder, file)
+                const filePath = path.join(commandPath, file)
 
                 const command = await dynamicImport(filePath) as CommandClass;
                 // Set a new item in the Collection with the key as the command name and the value as the exported module
@@ -48,13 +49,14 @@ export class ExtendedClient extends Client {
         };
 
         //Events
-        const eventsPath = fileURLToPath(new URL('../events', import.meta.url));
-        const eventFiles = fs.readdirSync(eventsPath);
+        const eventFolderPath = fileURLToPath(new URL('../events', import.meta.url));
+        const eventFolder = fs.readdirSync(eventFolderPath);
 
-        for (const folder of eventFiles) {
-            const eventFiles = fs.readdirSync(`${eventsPath}/${folder}`).filter(file => file.endsWith('.js'));
+        for (const folder of eventFolder) {
+            const eventPath = path.join(eventFolderPath, folder);
+            const eventFiles = fs.readdirSync(eventPath).filter(file => file.endsWith('.js'));
             for (const file of eventFiles) {
-                const filePath = path.join(eventsPath, folder, file)
+                const filePath = path.join(eventPath, file)
 
                 const event = await dynamicImport(filePath) as EventClass<keyof ClientEvents>;
                 if ('name' in event && 'execute' in event) {
