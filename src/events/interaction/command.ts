@@ -1,5 +1,4 @@
-import { Collection, Events, bold, inlineCode } from 'discord.js';
-
+import { Events, inlineCode, Collection, bold } from 'discord.js';
 import { EventClass } from '../../structures/event.js';
 import { missingPerms } from '../../misc/util.js';
 
@@ -12,20 +11,18 @@ export default new EventClass({
         const command = interaction.client.commands.get(interaction.commandName);
 
         if (!command?.data) {
-            interaction.reply({
+            console.error(`No command matching ${interaction.commandName} was found.`);
+            return interaction.reply({
                 content: `⚠️ There is no command matching ${inlineCode(interaction.commandName)}!`,
                 ephemeral: true,
             });
-            console.error(`No command matching ${interaction.commandName} was found.`);
-            return;
         };
 
         if (command.opt?.guildOnly && interaction.channel.isDMBased()) {
-            interaction.reply({
+            return interaction.reply({
                 content: 'This command can only be used in a guild.',
                 ephemeral: true
             });
-            return;
         };
 
         if (command.opt?.userPermissions) {
@@ -34,11 +31,10 @@ export default new EventClass({
                 missingPerms(interaction.memberPermissions, command.opt?.userPermissions);
 
             if (missingUserPerms?.length) {
-                interaction.reply({
+                return interaction.reply({
                     content: `You need the following permission${missingUserPerms.length > 1 ? "s" : ""}: ${missingUserPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
-                return;
             };
         };
 
@@ -48,11 +44,10 @@ export default new EventClass({
                 missingPerms(interaction.guild.members.me.permissions, command.opt?.botPermissions);
 
             if (missingBotPerms?.length) {
-                interaction.reply({
+                return interaction.reply({
                     content: `I need the following permission${missingBotPerms.length > 1 ? "s" : ""}: ${missingBotPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
-                return;
             };
         };
 
@@ -63,7 +58,7 @@ export default new EventClass({
 
             const now = Date.now();
             const timestamps = interaction.client.cooldown.get(`${command.data.name}-${interaction.guildId}`);
-            const cooldownAmount = (command.opt.cooldown || 3) * 1000;
+            const cooldownAmount = (command.opt.cooldown ?? 3) * 1000;
 
             if (timestamps.has(interaction.user.id)) {
                 const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
@@ -71,11 +66,10 @@ export default new EventClass({
                 if (now < expirationTime) {
                     const timeLeft = (expirationTime - now) / 1000;
 
-                    interaction.reply({
+                    return interaction.reply({
                         content: `Please wait ${bold(`${timeLeft.toFixed()} second(s)`)} before reusing this command!`,
                         ephemeral: true
                     });
-                    return;
                 };
             };
 
@@ -85,23 +79,23 @@ export default new EventClass({
             try {
                 await command.execute(interaction);
             } catch (error) {
-                await interaction.reply({
-                    content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`,
-                    ephemeral: true
-                });
-                //console.error(`Error executing ${interaction.commandName}`);
-                console.error(error?.stack);
+                console.error(error);
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                } else {
+                    await interaction.reply({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                }
             }
         } else {
             try {
                 await command.execute(interaction);
             } catch (error) {
-                await interaction.reply({
-                    content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`,
-                    ephemeral: true
-                });
-                //console.error(`Error executing ${interaction.commandName}`);
-                console.error(error?.stack);
+                console.error(error);
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                } else {
+                    await interaction.reply({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                }
             }
         };
     }
