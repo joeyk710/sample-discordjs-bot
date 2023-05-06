@@ -57,7 +57,5 @@ If you have any problems, please don't hesitate to open an **[issue here](https:
 ## Contributing 🙌
 Contributions are welcome! Please don't hesitate to open a **[pull request here](https://github.com/joeyk710/sample-discordjs-bot/pulls)**.
 
-*Any changes that you make be tested and functional before opening a pull request. Any pull requests that are not tested and functional will be closed.*
-
 ## License 🪪
 This project is licensed under the `GNU General Public License v3.0` - see the [LICENSE.md](LICENSE) file for details
