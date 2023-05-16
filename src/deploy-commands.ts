@@ -1,5 +1,5 @@
 import { REST, Routes } from 'discord.js';
-import { CommandClass } from './structures/command.js';
+import type { CommandClass } from './structures/command.js';
 import 'dotenv/config';
 
 import fs from 'node:fs';
@@ -21,7 +21,7 @@ for (const category of commandFolders) {
 		const filePath = path.join(commandPath, fileName);
 		const command = await dynamicImport(filePath) as CommandClass;
 		
-		commands.push(command.data.toJSON());
+		commands.push(command.data);
 	};
 };
 
