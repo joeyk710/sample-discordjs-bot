@@ -47,7 +47,11 @@ Name | Description
 
 > Note: These are just sample commands.  You can add more commands by creating new folders in the [src/commands](src/commands) directory. 
 
+____
+
 > Follow the [discord.js guide](https://discordjs.guide) on how to create commands and look at the [discord.js docs](https://discord.js.org) for more information.
+>
+> * *Note: The current discord.js guide recommends the use of builders such as [SlashCommandBuilder](https://discord.js.org/docs/packages/builders/main/SlashCommandBuilder:Class). This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType). Please check the [discord.js docs](https://discord.js.org) for proper types and properties.* 
 
 ***TypeScript knowledge is required if you plan on making changes to this project.***
 
