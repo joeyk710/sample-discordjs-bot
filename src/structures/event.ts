@@ -1,9 +1,9 @@
-import { ClientEvents } from 'discord.js';
+import type { ClientEvents } from 'discord.js';
 
 interface EventOptions<Key extends keyof ClientEvents> {
     name: Key;
     once?: boolean;
-    execute: (...args: ClientEvents[Key]) => any;
+    execute: (...args: ClientEvents[Key]) => Promise<any> | any;
 };
 
 export class EventClass<Key extends keyof ClientEvents> implements EventOptions<Key> {
