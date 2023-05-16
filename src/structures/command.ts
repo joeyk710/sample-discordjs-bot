@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ContextMenuCommandBuilder, PermissionResolvable } from "discord.js";
+import type { PermissionResolvable, ApplicationCommandData } from "discord.js";
 
 interface CustomOptions {
     userPermissions?: PermissionResolvable;
@@ -10,7 +10,7 @@ interface CustomOptions {
 };
 
 interface CommandOptions {
-    data: SlashCommandBuilder | ContextMenuCommandBuilder;
+    data: ApplicationCommandData;
     opt?: CustomOptions;
     execute: (...args: any) => Promise<any>;
 };

@@ -1,10 +1,11 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, inlineCode } from 'discord.js';
+import { ChatInputCommandInteraction, inlineCode } from 'discord.js';
 import { CommandClass } from '../../structures/command.js';
 
 export default new CommandClass({
-    data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
+    data: {
+        name: 'ping',
+        description: 'Pong!',
+    },
     opt: {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
