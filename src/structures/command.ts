@@ -1,4 +1,4 @@
-import type { PermissionResolvable, ApplicationCommandData } from "discord.js";
+import type { PermissionResolvable, RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
 
 interface CustomOptions {
     userPermissions?: PermissionResolvable;
@@ -10,7 +10,7 @@ interface CustomOptions {
 };
 
 interface CommandOptions {
-    data: ApplicationCommandData;
+    data: RESTPostAPIApplicationCommandsJSONBody;
     opt?: CustomOptions;
     execute: (...args: any) => Promise<any>;
 };
