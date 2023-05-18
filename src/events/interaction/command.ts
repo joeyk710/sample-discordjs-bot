@@ -20,7 +20,7 @@ export default new EventClass({
 
         if (command.opt?.guildOnly && interaction.channel.isDMBased()) {
             return interaction.reply({
-                content: 'This command can only be used in a guild.',
+                content: '⚠️ This command can only be used in a guild.',
                 ephemeral: true
             });
         };
@@ -32,7 +32,7 @@ export default new EventClass({
 
             if (missingUserPerms?.length) {
                 return interaction.reply({
-                    content: `You need the following permission${missingUserPerms.length > 1 ? "s" : ""}: ${missingUserPerms.map(x => inlineCode(x)).join(", ")}`,
+                    content: `⚠️ You need the following permission${missingUserPerms.length > 1 ? "s" : ""}: ${missingUserPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
             };
@@ -45,7 +45,7 @@ export default new EventClass({
 
             if (missingBotPerms?.length) {
                 return interaction.reply({
-                    content: `I need the following permission${missingBotPerms.length > 1 ? "s" : ""}: ${missingBotPerms.map(x => inlineCode(x)).join(", ")}`,
+                    content: `⚠️ I need the following permission${missingBotPerms.length > 1 ? "s" : ""}: ${missingBotPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
             };
@@ -67,7 +67,7 @@ export default new EventClass({
                     const timeLeft = (expirationTime - now) / 1000;
 
                     return interaction.reply({
-                        content: `Please wait ${bold(`${timeLeft.toFixed()} second(s)`)} before reusing this command!`,
+                        content: `⚠️ Please wait ${bold(`${timeLeft.toFixed()} second(s)`)} before reusing this command!`,
                         ephemeral: true
                     });
                 };
@@ -81,9 +81,9 @@ export default new EventClass({
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {
-                    await interaction.followUp({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                    await interaction.followUp({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
                 } else {
-                    await interaction.reply({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                    await interaction.reply({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
                 }
             }
         } else {
@@ -92,9 +92,9 @@ export default new EventClass({
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {
-                    await interaction.followUp({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                    await interaction.followUp({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
                 } else {
-                    await interaction.reply({ content: `There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+                    await interaction.reply({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
                 }
             }
         };
