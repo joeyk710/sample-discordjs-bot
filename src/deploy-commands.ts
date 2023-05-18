@@ -13,7 +13,7 @@ const commandFolders = fs.readdirSync(commandFolderPath);
 
 const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
-// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+// Grab the output of each command's data for deployment
 for (const category of commandFolders) {
 	const commandPath = path.join(commandFolderPath, category)
 	const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
