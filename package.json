@@ -39,7 +39,7 @@
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "rimraf": "^5.0.0",
+    "rimraf": "^5.0.1",
     "typescript": "^5.0.3"
   },
   "engines": {
