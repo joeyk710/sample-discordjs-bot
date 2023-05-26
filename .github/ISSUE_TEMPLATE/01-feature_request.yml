@@ -5,8 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        We can only implement features that Discord publishes, documents, and merges into the Discord API documentation.
-        We do not implement unreleased features, or features that are not disclosed in the Discord API documentation.
+        > We can only implement features that Discord publishes, documents, and merges into the [Discord API documentation](https://discord.com/developers/docs/intro).
+        We do not implement unreleased features, or features that are not disclosed in the [Discord API documentation](https://discord.com/developers/docs/intro).
   - type: textarea
     id: application_or_package
     attributes:
