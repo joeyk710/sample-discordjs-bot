@@ -1,6 +1,6 @@
 name: Feature Request
 description: Request a new feature for the sample handler.
-labels: [feature request]
+labels: ["enhancement", "question"]
 body:
   - type: markdown
     attributes:
