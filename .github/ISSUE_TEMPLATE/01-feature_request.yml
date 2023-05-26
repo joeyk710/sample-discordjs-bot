@@ -33,3 +33,6 @@ body:
     attributes:
       label: Other context
       description: Any other context, screenshots, or file uploads that help us understand your feature request.
+  - type: markdown
+    attributes:
+      value: "Thank you for filling out this feature request!"
