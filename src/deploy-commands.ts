@@ -1,17 +1,16 @@
-import { REST, Routes } from 'discord.js';
-import type { CommandClass } from './structures/command.js';
+import { RESTPostAPIApplicationCommandsJSONBody, REST, Routes } from 'discord.js';
+import { dynamicImport } from './misc/util.js';
+import { CommandClass } from './structures/command.js';
 import 'dotenv/config';
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
-const commands = [];
+const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
 
 const commandFolderPath = fileURLToPath(new URL('commands', import.meta.url));
 const commandFolders = fs.readdirSync(commandFolderPath);
-
-const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
 
 // Grab the output of each command's data for deployment
 for (const category of commandFolders) {
@@ -20,7 +19,7 @@ for (const category of commandFolders) {
 	for (const fileName of commandFiles) {
 		const filePath = path.join(commandPath, fileName);
 		const command = await dynamicImport(filePath) as CommandClass;
-		
+
 		commands.push(command.data);
 	};
 };

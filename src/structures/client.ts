@@ -2,12 +2,11 @@ import { Client, GatewayIntentBits, Collection, ClientEvents } from 'discord.js'
 
 import { EventClass } from './event.js';
 import { CommandClass } from './command.js';
+import { dynamicImport } from '../misc/util.js';
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-
-const dynamicImport = (path: string) => import(pathToFileURL(path).toString()).then((module) => module?.default);
+import { fileURLToPath } from 'node:url';
 
 export class ExtendedClient extends Client {
 
