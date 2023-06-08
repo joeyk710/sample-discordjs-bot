@@ -10,10 +10,9 @@
 		"noUnusedParameters": true,
 
 		// Modules
-		"lib": ["ESNext"],
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
 		"target": "ESNext",
-		"module": "Node16",
-		"moduleResolution": "Node16",
 		"moduleDetection": "force",
 		"resolveJsonModule": true,
 		
