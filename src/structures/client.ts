@@ -1,15 +1,14 @@
-import { Client, GatewayIntentBits, Collection, ClientEvents } from 'discord.js';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
+import { fileURLToPath, URL } from 'node:url';
+import { join } from 'node:path';
+import { readdirSync } from 'node:fs';
 
-import { EventClass } from './event.js';
-import { CommandClass } from './command.js';
 import { dynamicImport } from '../misc/util.js';
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import type { Command } from './command.js';
+import type { Event } from './event.js';
 
 export class ExtendedClient extends Client {
-
     constructor() {
         super({
             intents: [
@@ -19,54 +18,53 @@ export class ExtendedClient extends Client {
             rest: {
                 retries: 3,
                 timeout: 15_000
-            }
+            },
         });
-        this.commands = new Collection<string, CommandClass>();
+        this.commands = new Collection<string, Command>();
         this.cooldown = new Collection<string, Collection<string, number>>();
     };
-    
+
+    /**
+     * Loads all commands and events from their respective folders.
+     */
     private async loadModules() {
 
-        //Commands
+        // Command handling
         const commandFolderPath = fileURLToPath(new URL('../commands', import.meta.url));
-        const commandFolders = fs.readdirSync(commandFolderPath);
+        const commandFolders = readdirSync(commandFolderPath);
 
         for (const folder of commandFolders) {
-            const commandPath = path.join(commandFolderPath, folder);
-            const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
+            const commandPath = join(commandFolderPath, folder);
+            const commandFiles = readdirSync(commandPath).filter(file => file.endsWith('.js'));
             for (const file of commandFiles) {
-                const filePath = path.join(commandPath, file)
+                const filePath = join(commandPath, file);
 
-                const command = await dynamicImport(filePath) as CommandClass;
+                const command: Command = (await import(filePath.toString()))?.default;
                 // Set a new item in the Collection with the key as the command name and the value as the exported module
                 if ('data' in command && 'execute' in command) {
                     this.commands.set(command.data.name, command);
                 } else {
                     console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-                };
-            };
-        };
+                }
+            }
+        }
 
-        //Events
+        // Event handling
         const eventFolderPath = fileURLToPath(new URL('../events', import.meta.url));
-        const eventFolder = fs.readdirSync(eventFolderPath);
+        const eventFolder = readdirSync(eventFolderPath);
 
         for (const folder of eventFolder) {
-            const eventPath = path.join(eventFolderPath, folder);
-            const eventFiles = fs.readdirSync(eventPath).filter(file => file.endsWith('.js'));
+            const eventPath = join(eventFolderPath, folder);
+            const eventFiles = readdirSync(eventPath).filter(file => file.endsWith('.js'));
             for (const file of eventFiles) {
-                const filePath = path.join(eventPath, file)
+                const filePath = join(eventPath, file);
 
-                const event = await dynamicImport(filePath) as EventClass<keyof ClientEvents>;
+                const event: Event = await dynamicImport(filePath);
                 if ('name' in event && 'execute' in event) {
-                    if (event.once) {
-                        this.once(event.name, (...args) => event.execute(...args));
-                    } else {
-                        this.on(event.name, (...args) => event.execute(...args));
-                    }
+                    this[event.once ? 'once' : 'on'](event.name, async (...args) => event.execute(...args));
                 } else {
                     console.log(`[WARNING] The event at ${filePath} is missing a required "name" or "execute" property.`);
-                };
+                }
             }
         }
     };
@@ -74,8 +72,8 @@ export class ExtendedClient extends Client {
     /**
      * This is used to log into the Discord API with loading all commands and events.
      */
-    async start() {
-        this.login(process.env.TOKEN);
+    start() {
         this.loadModules();
+        this.login(); // Since the token is named DISCORD_TOKEN in the .env file, we don't need to pass it in here as it will be automatically grabbed.
     };
 };
