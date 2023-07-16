@@ -1,28 +1,45 @@
-import type { PermissionResolvable, RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
+import type { CommandInteraction, PermissionResolvable, RESTPostAPIApplicationCommandsJSONBody, RESTPostAPIApplicationGuildCommandsJSONBody } from 'discord.js';
 
 interface CustomOptions {
-    userPermissions?: PermissionResolvable;
-    botPermissions?: PermissionResolvable;
+    /**
+     * The permissions the user needs to run the command
+     */
+    userPermissions?: PermissionResolvable[];
+    /**
+     * The permissions the bot needs to run the command
+     */
+    botPermissions?: PermissionResolvable[];
+    /**
+     * The category the command belongs to
+     */
     category?: string;
+    /**
+     * The cooldown of the command in seconds
+     */
     cooldown?: number;
+    /**
+     * Whether the command is hidden from the help command
+     */
     visible?: boolean;
+    /**
+     * Whether the command can only be used in guilds
+     */
     guildOnly?: boolean;
 };
 
-interface CommandOptions {
-    data: RESTPostAPIApplicationCommandsJSONBody;
+export type Command = {
+    /**
+     * The data for the command
+     */
+    data: RESTPostAPIApplicationCommandsJSONBody | RESTPostAPIApplicationGuildCommandsJSONBody;
+    /**
+     * The custom options for the command
+     */
     opt?: CustomOptions;
-    execute: (...args: any) => Promise<any>;
-};
-
-export class CommandClass {
-    data: CommandOptions['data'];
-    opt?: CommandOptions['opt'];
-    execute: CommandOptions['execute'];
-
-    constructor(options: CommandOptions) {
-        this.data = options.data;
-        this.opt = options.opt;
-        this.execute = options.execute;
-    };
+    /**
+     * The function to execute when the command is called
+     *
+     * @param interaction - The interaction of the command
+     */
+    execute(interaction: CommandInteraction): Promise<void> | void;
 };
