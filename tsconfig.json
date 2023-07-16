@@ -13,7 +13,7 @@
 		"module": "ESNext",
 		"moduleResolution": "NodeNext",
 		"target": "ESNext",
-		"moduleDetection": "force",
+		"moduleDetection": "auto",
 		"resolveJsonModule": true,
 		
 		// Emit
@@ -30,6 +30,6 @@
 		"skipDefaultLibCheck": true,
 		"importHelpers": true
 	},
-	"include": ["src", "environment.d.ts"],
+	"include": ["src/**/*", "environment.d.ts"],
 	"exclude": ["node_modules"]
 }
