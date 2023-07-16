@@ -1,10 +1,11 @@
 import { Events } from 'discord.js';
-import { EventClass } from '../../structures/event.js';
 
-export default new EventClass({
+import type { Event } from '../../structures/event.js';
+
+export default {
     name: Events.ClientReady,
     once: true,
-    execute(client) {
-        console.log(client.user.username + " is online");
+    async execute(client) {
+        console.log(`${client.user.username} is online`);
     }
-});
+} satisfies Event<Events.ClientReady>;
