@@ -1,7 +1,10 @@
-import { ApplicationCommandType, MessageContextMenuCommandInteraction, hyperlink } from 'discord.js';
-import { CommandClass } from '../../structures/command.js';
+import { ActionRowBuilder, ApplicationCommandType, ButtonBuilder, ButtonStyle, type MessageContextMenuCommandInteraction } from 'discord.js';
 
-export default new CommandClass({
+import { formatMessageToEmbed } from '../../misc/util.js';
+
+import type { Command } from '../../structures/command.js';
+
+export default {
     data: {
         name: 'echo',
         type: ApplicationCommandType.Message,
@@ -12,16 +15,24 @@ export default new CommandClass({
         category: 'Context',
         cooldown: 5,
         visible: true,
-        guildOnly: false,
+        guildOnly: false
     },
     async execute(interaction: MessageContextMenuCommandInteraction<'cached'>) {
         const message = await interaction.targetMessage.fetch();
-        if (!message?.content) return interaction.reply({
-            content: hyperlink('No content was found in this message!', message.url),
-            ephemeral: true
-        })
-        else return interaction.reply({
-            content: hyperlink(message.content, message.url)
+
+        await interaction.deferReply();
+
+        await interaction.editReply({
+            embeds: [formatMessageToEmbed(message)],
+            components: [
+                new ActionRowBuilder<ButtonBuilder>()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('Original Message')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(message.url)
+                    )
+            ]
         });
     }
-});
+} satisfies Command;
