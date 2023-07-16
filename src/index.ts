@@ -1,5 +1,5 @@
-import { ExtendedClient } from "./structures/client.js";
-import 'dotenv/config'
+import { ExtendedClient } from './structures/client.js';
+import 'dotenv/config';
 
-export const client = new ExtendedClient();
+const client = new ExtendedClient();
 client.start();
