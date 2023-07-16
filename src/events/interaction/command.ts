@@ -1,8 +1,10 @@
 import { Events, inlineCode, Collection, bold } from 'discord.js';
-import { EventClass } from '../../structures/event.js';
+
 import { missingPerms } from '../../misc/util.js';
 
-export default new EventClass({
+import type { Event } from '../../structures/event.js';
+
+export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isCommand()) return;
@@ -12,17 +14,19 @@ export default new EventClass({
 
         if (!command?.data) {
             console.error(`No command matching ${interaction.commandName} was found.`);
-            return interaction.reply({
+            await interaction.reply({
                 content: `⚠️ There is no command matching ${inlineCode(interaction.commandName)}!`,
                 ephemeral: true,
             });
+            return;
         };
 
         if (command.opt?.guildOnly && interaction.channel.isDMBased()) {
-            return interaction.reply({
+            await interaction.reply({
                 content: '⚠️ This command can only be used in a guild.',
                 ephemeral: true
             });
+            return;
         };
 
         if (command.opt?.userPermissions) {
@@ -31,10 +35,11 @@ export default new EventClass({
                 missingPerms(interaction.memberPermissions, command.opt?.userPermissions);
 
             if (missingUserPerms?.length) {
-                return interaction.reply({
+                await interaction.reply({
                     content: `⚠️ You need the following permission${missingUserPerms.length > 1 ? "s" : ""}: ${missingUserPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
+                return;
             };
         };
 
@@ -44,10 +49,11 @@ export default new EventClass({
                 missingPerms(interaction.guild.members.me.permissions, command.opt?.botPermissions);
 
             if (missingBotPerms?.length) {
-                return interaction.reply({
+                await interaction.reply({
                     content: `⚠️ I need the following permission${missingBotPerms.length > 1 ? "s" : ""}: ${missingBotPerms.map(x => inlineCode(x)).join(", ")}`,
                     ephemeral: true
                 });
+                return;
             };
         };
 
@@ -66,10 +72,11 @@ export default new EventClass({
                 if (now < expirationTime) {
                     const timeLeft = (expirationTime - now) / 1000;
 
-                    return interaction.reply({
+                    await interaction.reply({
                         content: `⚠️ Please wait ${bold(`${timeLeft.toFixed()} second(s)`)} before reusing this command!`,
                         ephemeral: true
                     });
+                    return;
                 };
             };
 
@@ -99,4 +106,4 @@ export default new EventClass({
             }
         };
     }
-});
+} satisfies Event<Events.InteractionCreate>;
