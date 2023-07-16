@@ -1,10 +1,10 @@
-import { Collection } from 'discord.js';
-import { CommandClass } from './src/structures/command.js';
+import type { Collection } from 'discord.js';
+import type { Command } from './src/structures/command.js';
 
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
-            TOKEN: string;
+            DISCORD_TOKEN: string;
             CLIENT_ID: string;
             GUILD_ID: string;
             environment: "dev" | "prod" | "debug";
@@ -14,7 +14,7 @@ declare global {
 
 declare module 'discord.js' {
     interface Client {
-        commands: Collection<string, CommandClass>;
+        commands: Collection<string, Command>;
         cooldown: Collection<string, Collection<string, number>>;
     }
 }

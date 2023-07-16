@@ -23,7 +23,7 @@ Features include:
 3. Open the [.env](.env.example) file and fill in the required values as shown below
 
     ```env
-    TOKEN= 
+    DISCORD_TOKEN= 
     # Your bot token
 
     GUILD_ID=
