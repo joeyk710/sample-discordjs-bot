@@ -13,7 +13,6 @@ import { join } from 'node:path';
 import { dynamicImport } from './misc/util.js';
 
 import type { Command } from './structures/command.js';
-import 'dotenv/config';
 
 const commands: RESTPostAPIApplicationCommandsJSONBody[] | RESTPostAPIApplicationGuildCommandsJSONBody[] = [];
 
