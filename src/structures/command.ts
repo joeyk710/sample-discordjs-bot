@@ -27,6 +27,9 @@ interface CustomOptions {
     guildOnly?: boolean;
 };
 
+/**
+ * Defines the structure of an command.
+ */
 export type Command = {
     /**
      * The data for the command
