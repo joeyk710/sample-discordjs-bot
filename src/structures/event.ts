@@ -16,7 +16,7 @@ export type Event<Key extends keyof ClientEvents = keyof ClientEvents> = {
     once?: boolean;
     /**
      * The function to execute when the event is emitted.
-     * @param args - The parameters of the event
+     * @param parameters - The parameters of the event
      */
-    execute(...args: ClientEvents[Key]): Promise<void> | void;
+    execute(...parameters: ClientEvents[Key]): Promise<void> | void;
 };
