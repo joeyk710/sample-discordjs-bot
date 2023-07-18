@@ -28,7 +28,7 @@ interface CustomOptions {
 };
 
 /**
- * Defines the structure of an command.
+ * Defines the structure of a command.
  */
 export type Command = {
     /**
