@@ -1,6 +1,6 @@
 name: Feature Request
 description: Request a new feature for the sample handler.
-labels: ["enhancement", "question"]
+labels: ['enhancement', 'question']
 body:
   - type: markdown
     attributes:
@@ -35,4 +35,4 @@ body:
       description: Any other context, screenshots, or file uploads that help us understand your feature request.
   - type: markdown
     attributes:
-      value: "Thank you for filling out this feature request!"
+      value: 'Thank you for filling out this feature request!'
