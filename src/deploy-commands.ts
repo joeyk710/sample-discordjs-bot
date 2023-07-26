@@ -6,34 +6,22 @@ import {
 	type RESTPutAPIApplicationGuildCommandsJSONBody,
 	Routes,
 } from 'discord.js';
-import { readdirSync } from 'node:fs';
 import { fileURLToPath, URL } from 'node:url';
-import { join } from 'node:path';
 
-import { dynamicImport } from './misc/util.js';
+import { loadStructures } from './misc/util.js';
 
 import type { Command } from './structures/command.js';
 
 const commands: RESTPostAPIApplicationCommandsJSONBody[] | RESTPostAPIApplicationGuildCommandsJSONBody[] = [];
 
 const commandFolderPath = fileURLToPath(new URL('commands', import.meta.url));
-const commandFolders = readdirSync(commandFolderPath);
+const commandFiles: Command[] = await loadStructures(commandFolderPath, ["data", "execute"])
 
 // Grab the output of each command for deployment
-for (const category of commandFolders) {
-	const commandPath = join(commandFolderPath, category)
-	const commandFiles = readdirSync(commandPath).filter(file => file.endsWith('.js'));
-	for (const fileName of commandFiles) {
-		const filePath = join(commandPath, fileName);
+for (const command of commandFiles) {
+	commands.push(command.data)
+}
 
-		const command: Command = await dynamicImport(filePath);
-		if ('data' in command && 'execute' in command) {
-			commands.push(command.data);
-		} else {
-			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-		}
-	};
-};
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 

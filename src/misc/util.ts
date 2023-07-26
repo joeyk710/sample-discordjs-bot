@@ -1,5 +1,7 @@
 import { type PermissionResolvable, type PermissionsString, PermissionsBitField, type APIEmbed, type Message } from 'discord.js';
 import { pathToFileURL } from 'node:url';
+import { type PathLike, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 
 /**
  * This function gets the default export from a file.
@@ -9,6 +11,33 @@ export async function dynamicImport(path: string): Promise<any> {
     const module = await import(pathToFileURL(path).toString());
     return module?.default;
 };
+
+/**
+ * Loads all the structures from the provided directory path
+ * 
+ * @param {PathLike} path - The directory path to load the structures from
+ * @param {[string, string]} props - The properties to check if the structure is valid
+ */
+export async function loadStructures(path: PathLike, props: [string, string]) {
+    const fileData = [];
+
+    const folders = readdirSync(path);
+
+    for (const folder of folders) {
+      const filesPath = join(path.toString(), folder);
+      const files = readdirSync(filesPath).filter(file => file.endsWith('.js'));
+
+      for (const file of files) {
+        const filePath = join(filesPath, file);
+        const data = await dynamicImport(filePath);
+
+        if (props[0] in data && props[1] in data) fileData.push(data);
+        else console.warn(`The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`);
+      }
+    }
+
+    return fileData;
+}
 
 /** 
  * Shows the missing permissions.
