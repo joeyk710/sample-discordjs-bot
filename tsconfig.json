@@ -1,35 +1,35 @@
 // https://www.typescriptlang.org/tsconfig
 {
-	"compilerOptions": {
-		// Typings
-		"allowUnreachableCode": false,
-		"allowUnusedLabels": false,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitOverride": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
+  "compilerOptions": {
+    // Typings
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
-		// Modules
-		"module": "ESNext",
-		"moduleResolution": "NodeNext",
-		"target": "ESNext",
-		"moduleDetection": "auto",
-		"resolveJsonModule": true,
-		
-		// Emit
-		"outDir": "dist",
-		"alwaysStrict": false,
-		"sourceMap": false,
-		"esModuleInterop": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"allowSyntheticDefaultImports": true,
-		"removeComments": false,
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		"importHelpers": true
-	},
-	"include": ["src/**/*", "environment.d.ts"],
-	"exclude": ["node_modules"]
+    // Modules
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "moduleDetection": "auto",
+    "resolveJsonModule": true,
+
+    // Emit
+    "outDir": "dist",
+    "alwaysStrict": false,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "importHelpers": true
+  },
+  "include": ["src/**/*", "environment.d.ts"],
+  "exclude": ["node_modules"]
 }

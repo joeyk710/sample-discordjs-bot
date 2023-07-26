@@ -13,64 +13,64 @@ Features include:
 
 1. Clone the repository here on Github or from terminal (shown below)
 
-    ```bash
-    git clone https://github.com/joeyk710/sample-discordjs-bot.git
-    cd sample-discordjs-bot
-    ```
+   ```bash
+   git clone https://github.com/joeyk710/sample-discordjs-bot.git
+   cd sample-discordjs-bot
+   ```
 
 2. Rename [.env.example](.env.example) to `.env`
 
 3. Open the [.env](.env.example) file and fill in the required values as shown below
 
-    ```env
-    DISCORD_TOKEN= 
-    # Your bot token
+   ```env
+   DISCORD_TOKEN=
+   # Your bot token
 
-    GUILD_ID=
-    # Only put an ID here if you want commands to be registered in one server.
+   GUILD_ID=
+   # Only put an ID here if you want commands to be registered in one server.
 
-    CLIENT_ID=
-    # Your bot's application ID (can be found on Discord or on the Discord Developer Portal)
-    ```
+   CLIENT_ID=
+   # Your bot's application ID (can be found on Discord or on the Discord Developer Portal)
+   ```
 
 4. Installing dependencies
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 5. Deploying Commands
 
-    ```bash
-    npm run deploy
-    ```
+   ```bash
+   npm run deploy
+   ```
 
-    > If there is no guild ID provided for `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered globally.
+   > If there is no guild ID provided for `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered globally.
 
-    ***Note: Only run this command if you need to add commands or edit command data that does not appear in your server.***
+   **_Note: Only run this command if you need to add commands or edit command data that does not appear in your server._**
 
 6. Starting the bot
 
-    ```bash
-    npm run start
-    ```
+   ```bash
+   npm run start
+   ```
 
 ## Commands 🤖
 
-Name | Description
-| - | - |
-[/ping](src/commands/general/ping.ts) | Responds with "Pong!"
-| [Echo](src/commands/context/echo.ts) | Echoes the message selected in the channel the command was sent in
+| Name                                  | Description                                                        |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| [/ping](src/commands/general/ping.ts) | Responds with "Pong!"                                              |
+| [Echo](src/commands/context/echo.ts)  | Echoes the message selected in the channel the command was sent in |
 
-> Note: These are just sample commands.  You can add more commands by creating new folders & files in the [src/commands](src/commands) directory.
+> Note: These are just sample commands. You can add more commands by creating new folders & files in the [src/commands](src/commands) directory.
 
-____
+---
 
 > Follow the [discord.js guide](https://discordjs.guide) and look at the [discord.js docs](https://discord.js.org) for more information.
 >
-> - *Note: The current discord.js guide recommends the use of builders such as [SlashCommandBuilder](https://discord.js.org/docs/packages/builders/main/SlashCommandBuilder:Class). This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType). Please check the [discord.js docs](https://discord.js.org) for proper types and properties.*
+> - _Note: The current discord.js guide recommends the use of builders such as [SlashCommandBuilder](https://discord.js.org/docs/packages/builders/main/SlashCommandBuilder:Class). This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType). Please check the [discord.js docs](https://discord.js.org) for proper types and properties._
 
-- ***This template assumes you have a general understanding of TypeScript***
+- **_This template assumes you have a general understanding of TypeScript_**
 
 ## Issues 💭
 
