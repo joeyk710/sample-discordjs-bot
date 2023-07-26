@@ -23,16 +23,16 @@ export async function loadStructures(path: PathLike, props: [string, string]) {
     const folders = readdirSync(path);
 
     for (const folder of folders) {
-      const filesPath = join(path.toString(), folder);
-      const files = readdirSync(filesPath).filter(file => file.endsWith('.js'));
+        const filesPath = join(path.toString(), folder);
+        const files = readdirSync(filesPath).filter(file => file.endsWith('.js'));
 
-      for (const file of files) {
-        const filePath = join(filesPath, file);
-        const data = await dynamicImport(filePath);
+        for (const file of files) {
+            const filePath = join(filesPath, file);
+            const data = await dynamicImport(filePath);
 
-        if (props[0] in data && props[1] in data) fileData.push(data);
-        else console.warn(`\u001b[33m The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`);
-      }
+            if (props[0] in data && props[1] in data) fileData.push(data);
+            else console.warn(`\u001b[33m The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`);
+        }
     }
 
     return fileData;
@@ -56,7 +56,7 @@ export function ellipsis(text: string, total: number): string {
     if (text.length <= total) {
         return text;
     }
-  const keep = total - 3;
+    const keep = total - 3;
     if (keep < 1) return text.slice(0, total);
     return `${text.slice(0, keep)}...`;
 };

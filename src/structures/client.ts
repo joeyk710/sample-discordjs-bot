@@ -29,20 +29,20 @@ export class ExtendedClient extends Client {
 
         // Command handling
         const commandFolderPath = fileURLToPath(new URL('../commands', import.meta.url));
-        const commandFiles: Command[] = await loadStructures(commandFolderPath, ['data', 'execute'] );
+        const commandFiles: Command[] = await loadStructures(commandFolderPath, ['data', 'execute']);
 
         for (const command of commandFiles) {
-          this.commands.set(command.data.name, command);
+            this.commands.set(command.data.name, command);
         }
 
         // Event handling
         const eventFolderPath = fileURLToPath(new URL('../events', import.meta.url));
-        const eventFiles: Event[] = await loadStructures(eventFolderPath, ['name', 'execute'] );
+        const eventFiles: Event[] = await loadStructures(eventFolderPath, ['name', 'execute']);
 
         for (const event of eventFiles) {
-          this[event.once ? 'once' : 'on'](event.name, async (...args) => event.execute(...args));
+            this[event.once ? 'once' : 'on'](event.name, async (...args) => event.execute(...args));
         }
-      }
+    }
 
     /**
      * This is used to log into the Discord API with loading all commands and events.
