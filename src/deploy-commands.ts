@@ -15,11 +15,11 @@ import type { Command } from './structures/command.js';
 const commands: RESTPostAPIApplicationCommandsJSONBody[] | RESTPostAPIApplicationGuildCommandsJSONBody[] = [];
 
 const commandFolderPath = fileURLToPath(new URL('commands', import.meta.url));
-const commandFiles: Command[] = await loadStructures(commandFolderPath, ["data", "execute"])
+const commandFiles: Command[] = await loadStructures(commandFolderPath, ['data', 'execute']);
 
 // Grab the output of each command for deployment
 for (const command of commandFiles) {
-	commands.push(command.data)
+	commands.push(command.data);
 }
 
 // Construct and prepare an instance of the REST module

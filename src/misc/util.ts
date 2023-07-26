@@ -13,8 +13,7 @@ export async function dynamicImport(path: string): Promise<any> {
 };
 
 /**
- * Loads all the structures from the provided directory path
- * 
+ * Loads all the structures from the provided directory path.
  * @param {PathLike} path - The directory path to load the structures from
  * @param {[string, string]} props - The properties to check if the structure is valid
  */
@@ -32,7 +31,7 @@ export async function loadStructures(path: PathLike, props: [string, string]) {
         const data = await dynamicImport(filePath);
 
         if (props[0] in data && props[1] in data) fileData.push(data);
-        else console.warn(`The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`);
+        else console.warn(`\u001b[33m The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`);
       }
     }
 
