@@ -11,9 +11,7 @@ export default {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
         category: 'General',
-        cooldown: 5,
-        visible: true,
-        guildOnly: false
+        cooldown: 5
     },
     async execute(interaction: ChatInputCommandInteraction<'cached'>) {
         const currentTime = 1000 * 75 - interaction.client.uptime;

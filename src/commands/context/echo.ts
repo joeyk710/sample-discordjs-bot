@@ -13,9 +13,7 @@ export default {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
         category: 'Context',
-        cooldown: 5,
-        visible: true,
-        guildOnly: false
+        cooldown: 5
     },
     async execute(interaction: MessageContextMenuCommandInteraction<'cached'>) {
         const message = await interaction.targetMessage.fetch();
