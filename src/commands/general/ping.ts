@@ -2,6 +2,8 @@ import { type ChatInputCommandInteraction, inlineCode, RESTJSONErrorCodes, time,
 
 import type { Command } from '../../structures/command.js';
 
+import wait from 'node:timers/promises';
+
 export default {
     data: {
         name: 'ping',
@@ -11,9 +13,7 @@ export default {
         userPermissions: ['SendMessages'],
         botPermissions: ['SendMessages'],
         category: 'General',
-        cooldown: 5,
-        visible: true,
-        guildOnly: false
+        cooldown: 5
     },
     async execute(interaction: ChatInputCommandInteraction<'cached'>) {
         const currentTime = 1000 * 75 - interaction.client.uptime;
@@ -33,16 +33,18 @@ export default {
             fetchReply: true
         });
 
-        setTimeout(async () => {
+        try {
+            await wait.setTimeout(3000);
+
             const ping = msg.createdTimestamp - interaction.createdTimestamp;
+
             await interaction.editReply({
                 content: `Pong 🏓! \nRoundtrip Latency is ${inlineCode(`${ping}ms`)}. \nWebsocket Heartbeat is ${inlineCode(`${interaction.client.ws.ping}ms`)}`
-            }).catch((err) => {
-                if (err.code === RESTJSONErrorCodes.UnknownMessage) {
-                    console.error(`Failed to edit interaction: ${err.message}`);
-                }
-            });
-            return;
-        }, 3_000);
+            })
+        } catch (error) {
+            if (error.code === RESTJSONErrorCodes.UnknownMessage) {
+                console.error(`Failed to edit interaction: ${error.message}`);
+            }
+        }
     }
 } satisfies Command;

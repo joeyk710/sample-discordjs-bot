@@ -21,14 +21,6 @@ export default {
             return;
         };
 
-        if (command.opt?.guildOnly && interaction.channel.isDMBased()) {
-            await interaction.reply({
-                content: '⚠️ This command can only be used in a guild.',
-                ephemeral: true
-            });
-            return;
-        };
-
         if (command.opt?.userPermissions) {
             const missingUserPerms = missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) ?
                 missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) :

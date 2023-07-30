@@ -7,7 +7,6 @@ Features include:
 - Command & Event handler
 - A sample slash command & context menu command to get you started
 - Command cooldowns, user & client permission checks
-- Guild-only option (commands can be used only in guilds)
 
 ## Getting Started 🎉
 

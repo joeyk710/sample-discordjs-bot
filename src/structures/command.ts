@@ -17,14 +17,6 @@ interface CustomOptions {
      * The cooldown of the command in seconds
      */
     cooldown?: number;
-    /**
-     * Whether the command is hidden from the help command
-     */
-    visible?: boolean;
-    /**
-     * Whether the command can only be used in guilds
-     */
-    guildOnly?: boolean;
 };
 
 /**
