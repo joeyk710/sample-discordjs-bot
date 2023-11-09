@@ -56,7 +56,7 @@ Features include (but not limited to):
     > [!NOTE]
     >  If there is no `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered **_globally_**.
     > 
-    >  **_Only_** run this terminal script if you need to add commands or edit command data that **_do not_** not appear in your server.
+    >  **_Only_** run this terminal script if you need to add commands or edit command data that **_do not_** appear in your server.
 
 6. Starting the bot
 
