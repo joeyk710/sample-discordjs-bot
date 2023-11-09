@@ -1,12 +1,17 @@
 # About
 
-This is a sample Discord bot written in TypeScript. It uses [discord.js](https://discord.js.org/#/) with examples used from the [discord.js guide](https://discordjs.guide).
+This sample Discord bot written in TypeScript is a great starting place for creating the bot of your ✨ _dreams_ ✨. 
 
-Features include:
+Primarily using [discord.js](https://discord.js.org/#/) with examples used from the [discord.js guide](https://discordjs.guide).
 
-- Command & Event handler
-- A sample slash command & context menu command to get you started
-- Command cooldowns, user & client permission checks
+Features include (but not limited to):
+
+- Command & Event handlers
+- Starter Slash & Context-Menu Commands
+- Optional per-command cooldowns & User / Client permission checking
+
+> [!IMPORTANT]
+> **[Node.js v16.11.0](https://nodejs.org) or newer is required**
 
 ## Getting Started 🎉
 
@@ -36,40 +41,48 @@ Features include:
 
     ```bash
     npm install
+    yarn install
+    pnpm install
     ```
 
 5. Deploying Commands
 
     ```bash
     npm run deploy
+    yarn run deploy
+    pnpm run deploy
     ```
 
-    > If there is no guild ID provided for `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered globally.
-
-    ***Note: Only run this command if you need to add commands or edit command data that does not appear in your server.***
+    > [!NOTE]
+    >  If there is no `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered **_globally_**.
+    > 
+    >  **_Only_** run this terminal script if you need to add commands or edit command data that **_do not_** not appear in your server.
 
 6. Starting the bot
 
     ```bash
     npm run start
+    yarn run start
+    pnpm run start
     ```
 
-## Commands 🤖
+## Sample Commands 🤖
 
 Name | Description
 | - | - |
 [/ping](src/commands/general/ping.ts) | Responds with "Pong!"
 | [Echo](src/commands/context/echo.ts) | Echoes the message selected in the channel the command was sent in
 
-> Note: These are just sample commands.  You can add more commands by creating new folders & files in the [src/commands](src/commands) directory.
-
 ____
 
+> [!NOTE]
 > Follow the [discord.js guide](https://discordjs.guide) and look at the [discord.js docs](https://discord.js.org) for more information.
+> 
+> You will notice the current discord.js guide uses `@discordjs/builders` for command creation. This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType).
 >
-> - *Note: The current discord.js guide recommends the use of builders such as [SlashCommandBuilder](https://discord.js.org/docs/packages/builders/main/SlashCommandBuilder:Class). This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType). Please check the [discord.js docs](https://discord.js.org) for proper types and properties.*
-
-- ***This template assumes you have a general understanding of TypeScript***
+> Please check the [discord.js docs](https://discord.js.org) and [discord-api-types](https://discord-api-types.dev) for proper types, properties and method usage.
+>
+> ⚠️ ***This template assumes you have a general understanding of TypeScript*** ⚠️
 
 ## Issues 💭
 
