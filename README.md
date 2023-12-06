@@ -53,10 +53,10 @@ Features include (but not limited to):
     pnpm run deploy
     ```
 
-    > [!NOTE]
-    > If there is no `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered **_globally_**.
-    > 
-    >  **_Only_** run this terminal script if you need to add commands or edit command data that **_do not_** appear in your server.
+> [!NOTE]
+> If there is no `GUILD_ID` in the **[.env](.env.example)** file, commands will be registered **_globally_**.
+>
+> **_Only_** run this terminal script if you need to add commands or edit command data that **_do not_** appear in your server.
 
 6. Starting the bot
 
@@ -76,12 +76,11 @@ Name | Description
 ____
 
 > [!NOTE]
-> Follow the [discord.js guide](https://discordjs.guide) and look at the [discord.js docs](https://discord.js.org) for more information.
+> Please check the [discord.js docs](https://discord.js.org), [discord.js guide](https://discordjs.guide), and [discord-api-types](https://discord-api-types.dev) for proper types, properties and method usage.
 > 
 > You will notice the current discord.js guide uses `@discordjs/builders` for command creation. This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType).
 >
-> Please check the [discord.js docs](https://discord.js.org) and [discord-api-types](https://discord-api-types.dev) for proper types, properties and method usage.
->
+> 
 > ⚠️ ***This template assumes you have a general understanding of TypeScript*** ⚠️
 
 ## Issues 💭
