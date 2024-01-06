@@ -21,10 +21,11 @@ export default {
             return;
         };
 
-        if (command.opt?.userPermissions) {
-            const missingUserPerms = missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) ?
-                missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) :
-                missingPerms(interaction.memberPermissions, command.opt?.userPermissions);
+        const userPermissions = command.opt.userPermissions
+
+        if (userPermissions) {
+            const Permissions = interaction.member.permissionsIn(interaction.channel) || interaction.memberPermissions
+            const missingUserPerms = missingPerms(Permissions, userPermissions)
 
             if (missingUserPerms?.length) {
                 await interaction.reply({
@@ -35,10 +36,11 @@ export default {
             };
         };
 
-        if (command.opt?.botPermissions) {
-            const missingBotPerms = missingPerms(interaction.guild.members.me.permissionsIn(interaction.channel), command.opt?.botPermissions) ?
-                missingPerms(interaction.guild.members.me.permissionsIn(interaction.channel), command.opt?.botPermissions) :
-                missingPerms(interaction.guild.members.me.permissions, command.opt?.botPermissions);
+        const botPermissions = command.opt.botPermissions
+
+        if (botPermissions) {
+            const Permissions = interaction.guild.members.me.permissionsIn(interaction.channel) || interaction.guild.members.me.permissions
+            const missingBotPerms = missingPerms(Permissions, botPermissions)
 
             if (missingBotPerms?.length) {
                 await interaction.reply({
@@ -74,28 +76,17 @@ export default {
 
             timestamps.set(interaction.user.id, now);
             setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+        }
 
-            try {
-                await command.execute(interaction);
-            } catch (error) {
-                console.error(error);
-                if (interaction.replied || interaction.deferred) {
-                    await interaction.followUp({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
-                } else {
-                    await interaction.reply({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
-                }
+        try {
+            await command.execute(interaction);
+        } catch (error) {
+            console.error(error);
+            if (interaction.replied || interaction.deferred) {
+                await interaction.followUp({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
+            } else {
+                await interaction.reply({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
             }
-        } else {
-            try {
-                await command.execute(interaction);
-            } catch (error) {
-                console.error(error);
-                if (interaction.replied || interaction.deferred) {
-                    await interaction.followUp({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
-                } else {
-                    await interaction.reply({ content: `⚠️ There was an error while executing this command: \n${error.message} \nCheck the console for more info.`, ephemeral: true });
-                }
-            }
-        };
+        }
     }
 } satisfies Event<Events.InteractionCreate>;
