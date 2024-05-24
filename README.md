@@ -11,7 +11,7 @@ Features include (but not limited to):
 - Optional per-command cooldowns & User / Client permission checking
 
 > [!IMPORTANT]
-> **[Node.js v16.11.0](https://nodejs.org) or newer is required**
+> **Most current [Node LTS (Long-Term Support) Version](https://nodejs.org) is required**
 
 ## Getting Started 🎉
 
