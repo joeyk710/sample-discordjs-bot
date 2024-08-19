@@ -44,7 +44,7 @@ export async function loadStructures(path: PathLike, props: [string, string]) {
  * @param {PermissionResolvable} requiredPerms - The required permissions
 */
 export function missingPerms(memberPerms: PermissionResolvable, requiredPerms: PermissionResolvable): PermissionsString[] {
-    return new PermissionsBitField(memberPerms).missing(new PermissionsBitField(requiredPerms));
+    return new PermissionsBitField(memberPerms).missing(requiredPerms);
 };
 
 /**
