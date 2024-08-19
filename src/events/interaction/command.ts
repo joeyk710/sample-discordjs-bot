@@ -8,7 +8,6 @@ export default {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isCommand()) return;
-        if (!interaction.inCachedGuild()) return;
 
         const command = interaction.client.commands.get(interaction.commandName);
 
@@ -22,6 +21,7 @@ export default {
         };
 
         if (command.opt?.userPermissions) {
+            if (!interaction.inCachedGuild()) return;
             const missingUserPerms = missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) ?
                 missingPerms(interaction.member.permissionsIn(interaction.channel), command.opt?.userPermissions) :
                 missingPerms(interaction.memberPermissions, command.opt?.userPermissions);
@@ -36,6 +36,7 @@ export default {
         };
 
         if (command.opt?.botPermissions) {
+            if (!interaction.inCachedGuild()) return;
             const missingBotPerms = missingPerms(interaction.guild.members.me.permissionsIn(interaction.channel), command.opt?.botPermissions) ?
                 missingPerms(interaction.guild.members.me.permissionsIn(interaction.channel), command.opt?.botPermissions) :
                 missingPerms(interaction.guild.members.me.permissions, command.opt?.botPermissions);
