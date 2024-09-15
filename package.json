@@ -1,39 +1,19 @@
 {
   "name": "sample-bot",
   "version": "1.0.0",
-  "description": "Basic discord bot using discord.js with typescript",
-  "main": "dist/index.js",
-  "types": "environment.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "node --require dotenv/config dist/index.js",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean",
-    "build": "tsc --pretty",
-    "watch": "tsc -w",
-    "start": "npm run build && npm run start:prod",
-    "deploy": "npm run build && node --require dotenv/config dist/deploy-commands.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/joeyk710/sample-discordjs-bot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/joeyk710/sample-discordjs-bot/issues"
-  },
-  "homepage": "https://github.com/joeyk710/sample-discordjs-bot#readme",
-  "keywords": [
-    "discordjs",
-    "discord-bot",
-    "discord-api",
-    "typescript-discord-bot"
-  ],
-  "directories": {
-    "lib": "src"
-  },
-  "type": "module",
-  "author": "",
+  "description": "Basic Discord bot using discord.js with TypeScript",
   "license": "GNU GENERAL PUBLIC LICENSE V3",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --pretty",
+    "clean": "rimraf dist",
+    "dev": "pnpm build && pnpm start",
+    "deploy": "pnpm build && node --require dotenv/config dist/deploy-commands.js",
+    "prebuild": "pnpm run clean",
+    "start": "pnpm run build && node --require dotenv/config dist/index.js",
+    "watch": "tsc -w"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "discord.js": "^14.16.2",
@@ -44,6 +24,12 @@
     "typescript": "^5.6.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "pnpm": "9.10.0"
+  },
+  "packageManager": "pnpm@9.10.0",
+  "volta": {
+    "node": "18.17.0",
+    "pnpm": "9.10.0"
   }
 }

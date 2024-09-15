@@ -10,7 +10,7 @@
 		"noUnusedParameters": true,
 
 		// Modules
-		"module": "ESNext",
+		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ESNext",
 		"moduleDetection": "auto",
