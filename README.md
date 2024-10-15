@@ -4,13 +4,28 @@ This sample Discord bot written in TypeScript is a great starting place for crea
 
 Primarily using [discord.js](https://discord.js.org/#/) with examples used from the [discord.js guide](https://discordjs.guide).
 
+<a href="https://discord.js.org"><img src="https://img.shields.io/npm/v/discord.js.svg?&label=discord.js&color=5865F2&logo=discord" alt="npm version" /></a>
+
 Features include (but not limited to):
 
 - Command & Event handlers
 - Starter Slash & Context-Menu Commands
 - Optional per-command cooldowns & User / Client permission checking
 
-> [!IMPORTANT] > **The latest [Node LTS (Long-Term Support) Version](https://nodejs.org) is required**
+> [!IMPORTANT]
+> The latest **[Node LTS (Long-Term Support) Version](https://nodejs.org)** is required!
+>
+> <a href="https://nodejs.org">
+>  <img src="https://img.shields.io/npm/v/node?logo=node.js&label=node.js LTS &color=%235FA04E" alt="Node.js LTS Version"/></a>
+
+## Getting Started 🎉
+
+1. Clone the repository here on Github or from terminal (shown below)
+
+   ```bash
+   git clone https://github.com/joeyk710/sample-discordjs-bot.git
+   cd sample-discordjs-bot
+   ```
 
 ## Getting Started 🎉
 
@@ -39,16 +54,12 @@ Features include (but not limited to):
 4. Installing dependencies
 
    ```bash
-   npm install
-   yarn install
    pnpm install
    ```
 
 5. Deploying Commands
 
    ```bash
-   npm run deploy
-   yarn run deploy
    pnpm run deploy
    ```
 
@@ -60,8 +71,6 @@ Features include (but not limited to):
 6. Starting the bot
 
    ```bash
-   npm run start
-   yarn run start
    pnpm run start
    ```
 
