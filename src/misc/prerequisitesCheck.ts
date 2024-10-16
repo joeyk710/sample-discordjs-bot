@@ -33,7 +33,7 @@ const guildIdError = [
 const envVars = [
     chalk.underline.greenBright(`Environment variables:`),
     `${chalk.whiteBright(`DISCORD_TOKEN =`)} ${process.env.DISCORD_TOKEN?.replace(process.env.DISCORD_TOKEN, "( ͡° ͜ʖ ͡°)") || chalk.yellow("Not set")}`,
-    `${chalk.whiteBright(`CLIENT_ID =`)} ${process.env.CLIENT_ID || chalk.yellow("Not set")}`,
+    `${chalk.whiteBright(`APPLICATION_ID =`)} ${process.env.APPLICATION_ID || chalk.yellow("Not set")}`,
     `${chalk.whiteBright(`GUILD_ID =`)} ${process.env.GUILD_ID || chalk.yellow("Not set")}\n`
 ];
 
