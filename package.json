@@ -8,22 +8,24 @@
   "scripts": {
     "build": "tsc --pretty",
     "clean": "rimraf dist",
-    "deploy": "pnpm build && node --env-file=.env dist/deploy-commands.js",
+    "deploy": "pnpm build && node --require dotenv/config dist/deploy-commands.js",
+    "prereq": "pnpm build && node --require dotenv/config dist/misc/prerequisitesCheck.js",
     "dev": "pnpm build && pnpm start",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint --fix src",
     "lint:check": "eslint src",
-    "prebuild": "pnpm run clean",
-    "start": "pnpm run build && node --env-file=.env dist/index.js",
+    "prebuild": "pnpm clean",
+    "start": "pnpm prereq && node --require dotenv/config dist/index.js",
     "watch": "tsc -w"
   },
   "dependencies": {
-    "discord.js": "^14.16.3"
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-config-neon": "^0.2.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
@@ -31,11 +33,11 @@
   },
   "engines": {
     "node": ">=20",
-    "pnpm": "9.10.0"
+    "pnpm": "9.12.2"
   },
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@9.12.2",
   "volta": {
     "node": "20.17.0",
-    "pnpm": "9.10.0"
+    "pnpm": "9.12.2"
   }
 }

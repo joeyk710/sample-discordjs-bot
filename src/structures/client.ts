@@ -45,8 +45,7 @@ export class ExtendedClient extends Client {
    */
   public async start() {
     await this.loadModules();
-    // Since the token is named DISCORD_TOKEN in the .env file
-    // We don't need to pass it in here as it will be automatically grabbed.
-    await this.login();
+
+    await this.login(process.env.DISCORD_TOKEN);
   }
 }
