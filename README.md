@@ -19,16 +19,6 @@ Features include (not limited to):
 > <a href="https://nodejs.org">
 >  <img alt="Node.js" src="https://img.shields.io/github/v/release/nodejs/node?sort=semver&display_name=tag&logo=node.js&label=node.js&color=235FA04E">
 
-
-## Getting Started 🎉
-
-1. Clone the repository here on Github or from terminal (shown below)
-
-   ```bash
-   git clone https://github.com/joeyk710/sample-discordjs-bot.git
-   cd sample-discordjs-bot
-   ```
-
 ## Getting Started 🎉
 
 1. Clone the repository here on Github or from terminal (shown below)
