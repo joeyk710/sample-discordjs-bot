@@ -6,17 +6,19 @@ Primarily using [discord.js](https://discord.js.org/#/) with examples used from 
 
 <a href="https://discord.js.org"><img src="https://img.shields.io/npm/v/discord.js.svg?&label=discord.js&color=5865F2&logo=discord" alt="npm version" /></a>
 
-Features include (but not limited to):
+Features include (not limited to):
 
+- [Prerequistite Script](src/misc/prerequisitesCheck.ts) to ensure all [.env](.env.example) values are properly filled
 - Command & Event handlers
 - Starter Slash & Context-Menu Commands
 - Optional per-command cooldowns & User / Client permission checking
 
 > [!IMPORTANT]
-> The latest **[Node LTS (Long-Term Support) Version](https://nodejs.org)** is required!
+> [Most current or LTS version Node.js](https://nodejs.org) is required!
 >
 > <a href="https://nodejs.org">
->  <img src="https://img.shields.io/npm/v/node?logo=node.js&label=node.js LTS &color=%235FA04E" alt="Node.js LTS Version"/></a>
+>  <img alt="Node.js" src="https://img.shields.io/github/v/release/nodejs/node?sort=semver&display_name=tag&logo=node.js&label=node.js&color=235FA04E">
+
 
 ## Getting Started 🎉
 
@@ -47,7 +49,7 @@ Features include (but not limited to):
    GUILD_ID=
    # Only put an ID here if you want commands to be registered in one server.
 
-   CLIENT_ID=
+   APPLICATION_ID=
    # Your bot's application ID (can be found on Discord or on the Discord Developer Portal)
    ```
 
