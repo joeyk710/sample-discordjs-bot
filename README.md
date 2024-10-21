@@ -1,4 +1,4 @@
-# About
+# Sample TypeScript Discord Bot 🤖
 
 This sample Discord bot written in TypeScript is a great starting place for creating the bot of your ✨ _dreams_ ✨.
 
