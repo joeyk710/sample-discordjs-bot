@@ -4,7 +4,7 @@ import type { Command } from "./src/structures/command.js";
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      DISCORD_TOKEN: string;
+      APPLICATION_TOKEN: string;
       APPLICATION_ID: string;
       GUILD_ID: string;
       environment: "dev" | "prod" | "debug";
