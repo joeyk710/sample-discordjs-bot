@@ -46,6 +46,6 @@ export class ExtendedClient extends Client {
   public async start() {
     await this.loadModules();
 
-    await this.login(process.env.DISCORD_TOKEN);
+    await this.login(process.env.APPLICATION_TOKEN);
   }
 }
