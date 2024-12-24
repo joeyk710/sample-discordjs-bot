@@ -22,12 +22,12 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "eslint": "^8.57.1",
-    "eslint-config-neon": "^0.2.3",
+    "eslint-config-neon": "^0.2.4",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.2"
