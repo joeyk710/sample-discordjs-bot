@@ -25,7 +25,7 @@
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "@types/node": "^22.13.10",
+    "@types/node": "^22.13.13",
     "eslint": "^8.57.1",
     "eslint-config-neon": "^0.2.7",
     "prettier": "^3.5.3",
