@@ -33,7 +33,7 @@ Features include (not limited to):
 3. Open the [.env](.env.example) file and fill in the required values as shown below
 
    ```env
-   DISCORD_TOKEN=
+   APPLICATION_TOKEN=
    # Your bot token
 
    GUILD_ID=
