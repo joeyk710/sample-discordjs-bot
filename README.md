@@ -14,7 +14,7 @@ Features include (not limited to):
 - Optional per-command cooldowns & User / Client permission checking
 
 > [!IMPORTANT]
-> [Most current or LTS version Node.js](https://nodejs.org) is required!
+> [Most current or LTS version of Node.js](https://nodejs.org) is required!
 >
 > <a href="https://nodejs.org">
 >  <img alt="Node.js" src="https://img.shields.io/github/v/release/nodejs/node?sort=semver&display_name=tag&logo=node.js&label=node.js&color=235FA04E">
