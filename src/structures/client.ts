@@ -1,5 +1,5 @@
-import { fileURLToPath, URL } from "node:url";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { fileURLToPath, URL } from "node:url";
 import { loadStructures } from "../misc/util.js";
 import type { Command } from "./command.js";
 import type { Event } from "./event.js";
@@ -36,7 +36,7 @@ export class ExtendedClient extends Client {
     const eventFiles: Event[] = await loadStructures(eventFolderPath, ["name", "execute"]);
 
     for (const event of eventFiles) {
-      this[event.once ? "once" : "on"](event.name, async (...args) => event.execute(...args));
+      this[event.once ? "once" : "on"](event.name, (...args) => event.execute(...args));
     }
   }
 
