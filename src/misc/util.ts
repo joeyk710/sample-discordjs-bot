@@ -1,7 +1,3 @@
-import type { PathLike } from "node:fs";
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 import {
   PermissionsBitField,
   type APIEmbed,
@@ -9,15 +5,21 @@ import {
   type PermissionResolvable,
   type PermissionsString,
 } from "discord.js";
+import type { PathLike } from "node:fs";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
+import type { Command } from "../structures/command.js";
+import { Event } from "../structures/event.js";
 
 /**
  * This function gets the default export from a file.
  *
  * @param path - The path to the file
  */
-export async function dynamicImport(path: string): Promise<any> {
-  const module = await import(pathToFileURL(path).toString());
-  return module?.default;
+export async function dynamicImport<T>(path: string): Promise<T | undefined> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  return (await import(pathToFileURL(path).href))?.default as T | undefined;
 }
 
 /**
@@ -26,8 +28,8 @@ export async function dynamicImport(path: string): Promise<any> {
  * @param path - The directory path to load the structures from
  * @param props - The properties to check if the structure is valid
  */
-export async function loadStructures(path: PathLike, props: [string, string]): Promise<any[]> {
-  const fileData: any[] = [];
+export async function loadStructures<T extends Command | Event>(path: PathLike, props: [string, string]): Promise<T[]> {
+  const fileData: T[] = [];
 
   const folders = await readdir(path);
 
@@ -37,13 +39,21 @@ export async function loadStructures(path: PathLike, props: [string, string]): P
 
     for (const file of files) {
       const filePath = join(filesPath, file);
-      const data = await dynamicImport(filePath);
+      const data = await dynamicImport<T>(filePath);
 
-      if (props[0] in data && props[1] in data) fileData.push(data);
-      else
+      if (!data) {
+        continue;
+      }
+
+      if (!(props[0] in data) && !(props[1] in data)) {
         console.warn(
           `\u001B[33m The command at ${filePath} is missing a required ${props[0]} or ${props[1]} property.`,
         );
+
+        continue;
+      }
+
+      fileData.push(data);
     }
   }
 
