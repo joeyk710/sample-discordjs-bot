@@ -8,10 +8,10 @@ Primarily using [discord.js](https://discord.js.org/#/) with examples used from 
 
 Features include (not limited to):
 
-- [Prerequistite Script](src/misc/prerequisitesCheck.ts) to ensure all [.env](.env.example) values are properly filled
-- Command & Event handlers
-- Starter Slash & Context-Menu Commands
-- Optional per-command cooldowns & User / Client permission checking
+- [Prerequisite Script](src/misc/prerequisitesCheck.ts) to ensure all [.env](.env.example) values are properly filled;
+- Command & Event handlers;
+- Starter Slash & Context-Menu Commands; and
+- Optional per-command cooldowns & User / Client permission checking.
 
 > [!IMPORTANT]
 > [Most current or LTS version of Node.js](https://nodejs.org) is required!
@@ -21,16 +21,16 @@ Features include (not limited to):
 
 ## Getting Started 🎉
 
-1. Clone the repository here on Github or from terminal (shown below)
+1. Clone the repository here on GitHub or from terminal (shown below).
 
    ```bash
    git clone https://github.com/joeyk710/sample-discordjs-bot.git
    cd sample-discordjs-bot
    ```
 
-2. Rename [.env.example](.env.example) to `.env`
+2. Rename [.env.example](.env.example) to `.env`.
 
-3. Open the [.env](.env.example) file and fill in the required values as shown below
+3. Open the [.env](.env.example) file and fill in the required values as shown below.
 
    ```env
    APPLICATION_TOKEN=
@@ -43,13 +43,13 @@ Features include (not limited to):
    # Your bot's application ID (can be found on Discord or on the Discord Developer Portal)
    ```
 
-4. Installing dependencies
+4. Install dependencies.
 
    ```bash
    pnpm install
    ```
 
-5. Deploying Commands
+5. Deploy commands.
 
    ```bash
    pnpm run deploy
@@ -76,11 +76,11 @@ Features include (not limited to):
 ---
 
 > [!NOTE]
-> Please check the [discord.js docs](https://discord.js.org), [discord.js guide](https://discordjs.guide), and [discord-api-types](https://discord-api-types.dev) for proper types, properties and method usage.
+> Please check the [discord.js docs](https://discord.js.org), [discord.js guide](https://discordjs.guide), and [discord-api-types](https://discord-api-types.dev) for proper types, properties, and method usage.
 >
 > You will notice the current discord.js guide uses `@discordjs/builders` for command creation. This template uses raw objects for creating commands which makes use of enum types [ApplicationCommandType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandType) and [ApplicationCommandOptionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ApplicationCommandOptionType).
 >
-> ⚠️ **_This template assumes you have a general understanding of TypeScript_** ⚠️
+> ⚠️ **_This template assumes you have a general understanding of TypeScript._** ⚠️
 
 ## Issues 💭
 
@@ -92,4 +92,4 @@ Contributions are welcome! Please don't hesitate to open a **[pull request here]
 
 ## License 🪪
 
-This project is licensed under the `GNU General Public License v3.0` - see the [LICENSE.md](LICENSE) file for details
+This project is licensed under the `GNU General Public License v3.0` - see the [LICENSE.md](LICENSE) file for details.
