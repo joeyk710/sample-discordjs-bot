@@ -37,7 +37,7 @@ export type Command = {
    *
    * @param interaction - The interaction of the command
    */
-  execute(interaction: CommandInteraction): Promise<void> | void;
+  execute(interaction: CommandInteraction): unknown;
   /**
    * The custom options for the command
    */
