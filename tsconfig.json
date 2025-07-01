@@ -29,7 +29,8 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "pretty": true
   },
   "include": ["src/**/*", "environment.d.ts"],
   "exclude": ["node_modules"]
