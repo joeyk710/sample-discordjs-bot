@@ -1,5 +1,12 @@
+import {
+  inlineCode,
+  MessageFlags,
+  RESTJSONErrorCodes,
+  time,
+  TimestampStyles,
+  type ChatInputCommandInteraction,
+} from "discord.js";
 import { setTimeout } from "node:timers/promises";
-import { inlineCode, time, RESTJSONErrorCodes, TimestampStyles, type ChatInputCommandInteraction } from "discord.js";
 import type { Command } from "../../structures/command.js";
 
 export default {
@@ -14,33 +21,50 @@ export default {
     cooldown: 5,
   },
   async execute(interaction: ChatInputCommandInteraction<"cached">) {
-    const currentTime = 1_000 * 75 - interaction.client.uptime;
+    // ~42.5 seconds is when a heartbeat is initiated after becoming ready.
+
+    const waitTime = 1_000 * 42.5;
+
+    const currentTime = waitTime - interaction.client.uptime;
     const botReadyTimestamp = Math.round((Date.now() + currentTime) / 1_000);
 
-    // This is to prevent from using the command so the client has a chance to output a proper latency report
-    if (interaction.client.uptime < 1_000 * 75) {
-      await interaction.reply({
+    // This is to prevent from using the command so the client has a chance to output a proper latency report (i.e., to avoid values of -1).
+    if (interaction.client.uptime < waitTime) {
+      return await interaction.reply({
         content: `The bot is still starting up. Run this command again ${time(botReadyTimestamp, TimestampStyles.RelativeTime)} to see statistical information.`,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
-      return;
     }
 
     const msg = await interaction.reply({
       content: "🏓 Pinging...",
-      fetchReply: true,
+      withResponse: true,
     });
 
     try {
       await setTimeout(3_000);
 
-      const ping = msg.createdTimestamp - interaction.createdTimestamp;
+      if (!msg.resource?.message) {
+        return await interaction.editReply({
+          content: "Failed to obtain accurate ping latency.",
+        });
+      }
 
-      await interaction.editReply({
-        content: `Pong 🏓! \nRoundtrip Latency is ${inlineCode(`${ping}ms`)}. \nWebsocket Heartbeat is ${inlineCode(`${interaction.client.ws.ping}ms`)}`,
+      const ping = msg.resource.message.createdTimestamp - interaction.createdTimestamp;
+
+      const content = [
+        "Pong 🏓!",
+        `Roundtrip latency is ${inlineCode(`${ping}ms`)}`,
+        `Websocket heartbeat is ${inlineCode(`${interaction.client.ws.ping}ms`)}`,
+      ].join("\n");
+
+      return await interaction.editReply({
+        content,
       });
     } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       if (error.code === RESTJSONErrorCodes.UnknownMessage) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         console.error(`Failed to edit interaction: ${error.message}`);
       }
     }
