@@ -9,7 +9,7 @@ export type Event<Key extends keyof ClientEvents = keyof ClientEvents> = {
    *
    * @param parameters - The parameters of the event
    */
-  execute(...parameters: ClientEvents[Key]): Promise<void> | void;
+  execute(...parameters: ClientEvents[Key]): unknown;
   /**
    * The name of the event to listen to
    */
