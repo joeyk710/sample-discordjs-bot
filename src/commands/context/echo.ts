@@ -10,7 +10,7 @@ import type { Command } from "../../structures/command.js";
 
 export default {
   data: {
-    name: "echo",
+    name: "Echo",
     type: ApplicationCommandType.Message,
   },
   opt: {
@@ -24,7 +24,7 @@ export default {
 
     await interaction.deferReply();
 
-    await interaction.editReply({
+    return await interaction.editReply({
       embeds: [formatMessageToEmbed(message)],
       components: [
         new ActionRowBuilder<ButtonBuilder>().addComponents(
