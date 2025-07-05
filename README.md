@@ -46,13 +46,13 @@ Features include (not limited to):
 4. Install dependencies.
 
    ```bash
-   pnpm install
+   npm install
    ```
 
 5. Deploy commands.
 
    ```bash
-   pnpm run deploy
+   npm run deploy
    ```
 
 > [!NOTE]
@@ -63,7 +63,7 @@ Features include (not limited to):
 6. Starting the bot
 
    ```bash
-   pnpm run start
+   npm run start
    ```
 
 ## Sample Commands 🤖

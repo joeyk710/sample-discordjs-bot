@@ -10,7 +10,7 @@ import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import type { Command } from "../structures/command.js";
-import { Event } from "../structures/event.js";
+import type { Event } from "../structures/event.js";
 
 /**
  * This function gets the default export from a file.
