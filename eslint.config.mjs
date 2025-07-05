@@ -33,6 +33,7 @@ export default tseslint.config(
       "@typescript-eslint/no-floating-promises": 1,
       "@typescript-eslint/no-unused-vars": 1,
       "@typescript-eslint/prefer-optional-chain": 1,
+      "@typescript-eslint/consistent-type-imports": 2,
     },
   },
   {
